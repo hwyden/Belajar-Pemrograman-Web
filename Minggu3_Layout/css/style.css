@@ -1,0 +1,265 @@
+/* style logo */
+
+.navbar-brand {
+    font-size: 1.3rem;
+    /* memperbesar ukuran */
+    text-transform: uppercase;
+    /* besar kecil huruf */
+    font-weight: bold;
+    /* tebal tipis tulisan */
+}
+
+
+/* style text menu header */
+
+.navbar-light .navbar-nav .nav-link {
+    color: #7538e8;
+    /* memberi warna tulisan */
+}
+
+.push-right {
+    margin-left: auto;
+    margin-right: 0 !important;
+    float: right;
+}
+
+
+/* style menu header yang aktif */
+
+.navbar-light .navbar-nav .active>.nav-link,
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar-light .navbar-nav .show>.nav-link {
+    color: #7538e8;
+    font-weight: bold;
+    border-bottom: 3px solid #7538e8;
+}
+
+
+/* Style gallery */
+
+.box-gallery .box-content-gallery {
+    padding: 10px 20px;
+}
+
+.box-gallery .box-content-gallery .box-left {
+    /* background-color: #f3f3f3; */
+}
+
+.box-gallery .box-content-gallery .box-right {
+    /* background-color: #f3f3f3; */
+}
+
+.box-gallery .box-content-gallery h3,
+.box-gallery .box-content-gallery p {
+    margin-bottom: 0;
+}
+
+
+/* Style space */
+
+.mt {
+    margin-top: 32px;
+}
+
+.mt-halft {
+    margin-top: 16px;
+}
+
+
+/* Style share */
+
+.fa {
+    padding: 10px;
+    font-size: 30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
+
+.fa-google {
+    background: #dd4b39;
+    color: white;
+}
+
+.fa-youtube {
+    background: #bb0000;
+    color: white;
+}
+
+.fa-instagram {
+    background: #125688;
+    color: white;
+}
+
+
+/* Style list di footer / menu di footer */
+
+.listUnstyled {
+    list-style: none;
+    padding-left: 0;
+}
+
+.listUnstyled a {
+    color: #7538e8;
+}
+
+
+/****************
+  Catalog 
+ ****************/
+
+.boxBanner-Catalog {
+    padding: 30px;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.breadcrumb {
+    background-color: transparent;
+    text-align: center;
+}
+
+.item-catalog {
+    margin: 16px 0;
+}
+
+
+/* Create two equal columns that floats next to each other */
+
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+}
+
+
+/* Clear floats after the columns */
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+/* footer */
+
+footer {
+    background-color: #e4e4e4;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.img-zoom-container {
+    position: relative;
+}
+
+.img-zoom-lens {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    /*set the size of the lens:*/
+    width: 40px;
+    height: 40px;
+}
+
+.img-zoom-result {
+    border: 1px solid #d4d4d4;
+    /*set the size of the result div:*/
+    width: 300px;
+    height: 300px;
+}
+
+</style><script>function imageZoom(imgID, resultID) {
+    var img,
+    lens,
+    result,
+    cx,
+    cy;
+    img=document.getElementById(imgID);
+    result=document.getElementById(resultID);
+    /*create lens:*/
+    lens=document.createElement("DIV");
+    lens.setAttribute("class", "img-zoom-lens");
+    /*insert lens:*/
+    img.parentElement.insertBefore(lens, img);
+    /*calculate the ratio between result DIV and lens:*/
+    cx=result.offsetWidth / lens.offsetWidth;
+    cy=result.offsetHeight / lens.offsetHeight;
+    /*set background properties for the result DIV:*/
+    result.style.backgroundImage="url('"+img.src+"')";
+    result.style.backgroundSize=(img.width * cx)+"px "+(img.height * cy)+"px";
+    /*execute a function when someone moves the cursor over the image, or the lens:*/
+    lens.addEventListener("mousemove", moveLens);
+    img.addEventListener("mousemove", moveLens);
+    /*and also for touch screens:*/
+    lens.addEventListener("touchmove", moveLens);
+    img.addEventListener("touchmove", moveLens);
+    function moveLens(e) {
+        var pos,
+        x,
+        y;
+        /*prevent any other actions that may occur when moving over the image:*/
+        e.preventDefault();
+        /*get the cursor's x and y positions:*/
+        pos=getCursorPos(e);
+        /*calculate the position of the lens:*/
+        x=pos.x - (lens.offsetWidth / 2);
+        y=pos.y - (lens.offsetHeight / 2);
+        /*prevent the lens from being positioned outside the image:*/
+        if (x > img.width - lens.offsetWidth) {
+            x=img.width - lens.offsetWidth;
+        }
+        if (x < 0) {
+            x=0;
+        }
+        if (y > img.height - lens.offsetHeight) {
+            y=img.height - lens.offsetHeight;
+        }
+        if (y < 0) {
+            y=0;
+        }
+        /*set the position of the lens:*/
+        lens.style.left=x+"px";
+        lens.style.top=y+"px";
+        /*display what the lens "sees":*/
+        result.style.backgroundPosition="-"+(x * cx)+"px -"+(y * cy)+"px";
+    }
+    function getCursorPos(e) {
+        var a,
+        x=0,
+        y=0;
+        e=e || window.event;
+        /*get the x and y positions of the image:*/
+        a=img.getBoundingClientRect();
+        /*calculate the cursor's x and y coordinates, relative to the image:*/
+        x=e.pageX - a.left;
+        y=e.pageY - a.top;
+        /*consider any page scrolling:*/
+        x=x - window.pageXOffset;
+        y=y - window.pageYOffset;
+        return {
+            x: x, y: y
+        }
+        ;
+    }
+}
+
+</script>
