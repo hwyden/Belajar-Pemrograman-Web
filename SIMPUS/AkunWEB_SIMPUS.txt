@@ -1,0 +1,13 @@
+AKUN WEB
+
+Username = Admin@admin 
+Password = 12345
+
+Username = dokter@simpus
+Password = 12345
+
+Username = farmasi@simpus
+Password = 12345
+
+Username = pendaftaran@simpus
+Password = 12345
